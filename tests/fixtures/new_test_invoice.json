@@ -1,0 +1,32 @@
+{
+  "invoice_number": "INV-2026-TEST",
+  "vendor": "Apex Industrial Supplies",
+  "date": "2026-02-01",
+  "due_date": "2026-03-01",
+  "line_items": [
+    {
+      "item": "WidgetA",
+      "quantity": 10,
+      "unit_price": 250.00,
+      "amount": 2500.00
+    },
+    {
+      "item": "GadgetX",
+      "quantity": 20,
+      "unit_price": 750.00,
+      "amount": 15000.00
+    },
+    {
+      "item": "UnknownGizmo",
+      "quantity": 2,
+      "unit_price": 100.00,
+      "amount": 200.00
+    }
+  ],
+  "subtotal": 17700.00,
+  "tax_rate": 0.05,
+  "tax_amount": 885.00,
+  "total": 18585.00,
+  "currency": "USD",
+  "payment_terms": "Net 30"
+}

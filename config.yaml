@@ -1,0 +1,72 @@
+# Invoice Ingestion Pipeline Configuration
+metadata:
+  name: "Invoice Ingestion Pipeline"
+  version: "1.0.0"
+  description: "Multi-format invoice ingestion with LLM extraction and deterministic validation"
+
+# LLM Configuration
+llm:
+  provider: "openai"
+  model: "gpt-4o"
+  temperature: 0.0  # Deterministic extraction
+  
+# Supported input formats
+supported_formats:
+  - pdf
+  - json
+  - txt
+  - csv
+  - xml
+  - email
+
+# Extraction schema — the variables we extract from every invoice
+extraction_schema:
+  invoice_id: { type: "string", required: true }
+  date: { type: "date", required: true }
+  due_date: { type: "date", required: true }
+  vendor:
+    name: { type: "string", required: true }
+    address: { type: "string", required: false }
+  line_items:
+    type: "array"
+    min_items: 1
+    item_schema:
+      item: { type: "string", required: true }
+      quantity: { type: "decimal", required: true }
+      unit_price: { type: "decimal", required: true }
+      amount: { type: "decimal", computed: true }
+      note: { type: "string", required: false }
+  subtotal: { type: "decimal", required: false }
+  tax_rate: { type: "decimal", required: false }
+  tax_amount: { type: "decimal", required: false }
+  total: { type: "decimal", required: true }
+  currency: { type: "string", default: "USD" }
+  payment_terms: { type: "string", required: false }
+  payment_terms_days: { type: "integer", computed: true }
+  shipping: { type: "decimal", required: false }
+  notes: { type: "string", required: false }
+  revision: { type: "string", required: false }
+
+# Validation rules
+validation:
+  arithmetic:
+    tolerance: 0.01  # Allow $0.01 rounding difference
+    skip_discount_check: true  # Don't verify amount for "discount" line items
+  anomaly_detection:
+    max_total_threshold: 50000  # Flag invoices above this amount
+    zero_tax_threshold: 10000   # Flag large invoices with zero tax
+    suspicious_keywords:
+      - "URGENT"
+      - "IMMEDIATE"
+      - "ASAP"
+      - "penalty"
+      - "wire transfer"
+    suspicious_vendor_keywords:
+      - "Fraud"
+      - "Fake"
+      - "Scam"
+
+# Database
+database:
+  type: "sqlite"
+  path: "invoices.db"

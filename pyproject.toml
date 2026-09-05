@@ -1,0 +1,37 @@
+[project]
+name = "invoice-pipeline"
+version = "0.1.0"
+description = "Invoice ingestion pipeline with LLM-based extraction and deterministic validation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+dependencies = [
+    # LLM via OpenRouter (OpenAI-compatible API)
+    "openai>=1.50.0",
+    # Data validation
+    "pydantic>=2.10.0",
+    # Date parsing
+    "python-dateutil>=2.9.0",
+    # PDF text extraction (text-based PDFs)
+    "pdfminer.six>=20231228",
+    # YAML config
+    "pyyaml>=6.0",
+    # CLI
+    "click>=8.0",
+    # Tabulate for pretty printing
+    "tabulate>=0.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

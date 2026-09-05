@@ -1,0 +1,21 @@
+{
+  "invoice_number": "INV-BIG-25K",
+  "vendor": "HeavyMachinery Corp",
+  "date": "2026-02-12",
+  "due_date": "2026-03-12",
+  "line_items": [
+    {
+      "item": "PowerUnit",
+      "quantity": 20,
+      "unit_price": 1200.00,
+      "amount": 24000.00
+    }
+  ],
+  "subtotal": 24000.00,
+  "tax_rate": 0.05,
+  "tax_amount": 1200.00,
+  "total": 25200.00,
+  "currency": "USD",
+  "payment_terms": "Net 30",
+  "notes": "Annual factory heavy machinery turbine replacement"
+}

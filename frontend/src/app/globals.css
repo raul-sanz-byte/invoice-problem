@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* =====================================================
+   FlowAudit AI — Design System Tokens
+   ===================================================== */
+:root {
+  /* Surface palette */
+  --surface: #e8eaf0;
+  --surface-dim: #d4d6dc;
+  --surface-bright: #edeef4;
+  --surface-container-lowest: #f0f2f8;
+  --surface-container-low: #e5e7ed;
+  --surface-container: #e2e4ea;
+  --surface-container-high: #dcdee4;
+  --surface-container-highest: #d6d8de;
+
+  /* Primary */
+  --primary: #6366f1;
+  --primary-container: #818cf8;
+  --on-primary: #ffffff;
+  --on-primary-container: #e0e2ff;
+  --primary-fixed: #e0e2ff;
+  --primary-fixed-dim: #a5b4fc;
+
+  /* Secondary */
+  --secondary: #6c6e7e;
+  --secondary-container: #d8dae6;
+  --on-secondary: #ffffff;
+
+  /* Tertiary */
+  --tertiary: #7c3aed;
+  --tertiary-container: #a78bfa;
+
+  /* Error */
+  --error: #dc2626;
+  --error-container: #fee2e2;
+
+  /* On-surface */
+  --on-surface: #2e3040;
+  --on-surface-variant: #585a68;
+  --outline: #8a8c9a;
+  --outline-variant: #d0d2dc;
+}
+
+/* =====================================================
+   Base Reset
+   ===================================================== */
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overscroll-behavior: none;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background: var(--surface);
+    color: var(--on-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* =====================================================
+   Neumorphic Utilities
+   ===================================================== */
+.neo-raised {
+  box-shadow:
+    6px 6px 12px rgba(0, 0, 0, 0.08),
+    -6px -6px 12px rgba(255, 255, 255, 0.6);
+}
+
+.neo-inset {
+  box-shadow:
+    inset 4px 4px 8px rgba(0, 0, 0, 0.06),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+}
+
+/* =====================================================
+   Paper & Card Shadows
+   ===================================================== */
+.paper-shadow {
+  box-shadow:
+    0 12px 32px -8px rgba(46, 48, 64, 0.12),
+    0 4px 14px -3px rgba(46, 48, 64, 0.06),
+    0 0 0 1px rgba(208, 210, 220, 0.55);
+}
+
+.active-slide-glow {
+  box-shadow:
+    0 20px 40px -12px rgba(99, 102, 241, 0.22),
+    0 0 0 2px rgba(99, 102, 241, 0.6);
+}
+
+/* =====================================================
+   Scrollbar Utilities
+   ===================================================== */
+::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* =====================================================
+   Carousel Utilities
+   ===================================================== */
+.carousel-card {
+  flex-shrink: 0;
+}
+
+/* =====================================================
+   Animations
+   ===================================================== */
+@keyframes slideUp {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.25s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(48px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-48px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+
+/* =====================================================
+   Custom Scrollbar for Modal
+   ===================================================== */
+.modal-scroll::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+}
+
+.modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 3px;
+}
+
+.modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.4);
+}
+
+/* =====================================================
+   Tailwind v4 theme overrides
+   ===================================================== */
+@theme inline {
+  --color-background: var(--surface);
+  --color-foreground: var(--on-surface);
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
